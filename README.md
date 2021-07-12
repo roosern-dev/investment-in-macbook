@@ -1,1 +1,1 @@
-This is my investment for a chance to get a macbook.
+This is my investment for a chance to get a macbook. Hope that my investment pays off and gets the job offer.
