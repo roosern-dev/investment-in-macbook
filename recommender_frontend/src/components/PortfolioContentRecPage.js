@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { Typography, Container, Box, FormControl, FormLabel, Select, Grid, makeStyles, InputLabel, MenuItem, TextField, Button } from "@material-ui/core"
+import { Typography, Container, Box, FormControl, FormLabel, Select, Grid, makeStyles, InputLabel, MenuItem, TextField, Button } from "@material-ui/core";
+import {useState} from 'react';
 import PortfolioRecommendations from './PortfolioRecommendations'
 
 
@@ -17,10 +18,21 @@ const useStyle = makeStyles(theme => ({
 
 const PortfolioContentRecPage = () => {
     const classes = useStyle();
+    const [Books, setBooks] = useState(
+        [
+            { title: 'My new website', body: 'lorem ipsum...', author: 'mario', id: 1 },
+            { title: 'Welcome party!', body: 'lorem ipsum...', author: 'yoshi', id: 2 },
+            { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3 }
+          ]
+        );
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert("hello");
+        axios.get("http://localhost:3004/books")
+        .then(res=> {
+            const books = res.data;
+            setBooks(books);
+        })
     }
 
     return ( 
@@ -97,7 +109,9 @@ const PortfolioContentRecPage = () => {
             </form>
             <br></br>
             <br></br>
-            <PortfolioRecommendations></PortfolioRecommendations>
+            <PortfolioRecommendations Books={Books}></PortfolioRecommendations>
+            
+            
         </Container>
         </>
      );
